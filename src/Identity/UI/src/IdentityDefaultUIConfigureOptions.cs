@@ -39,7 +39,11 @@ namespace Microsoft.AspNetCore.Identity.UI
             options.Conventions.AddAreaFolderApplicationModelConvention(
                 IdentityUIDefaultAreaName,
                 "/Account/Manage",
-                pam => pam.Filters.Add(new ExternalLoginsPageFilter<TUser>()));
+                pam =>
+                {
+                    pam.Filters.Add(new ExternalLoginsPageFilter<TUser>());
+                    pam.Filters.Add(new UserManagerSupportsPageFilter<TUser>());
+                });
         }
 
         public void Configure(CookieAuthenticationOptions options) {
